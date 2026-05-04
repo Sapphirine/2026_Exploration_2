@@ -1,0 +1,84 @@
+{
+  "ideation_hits": [
+    {
+      "entry_id": "idea-34b34d87",
+      "kind": "promising_direction",
+      "summary": "Differentiable Expert Pruning via Learned Sparsity Masks",
+      "goal": "Propose a novel method to improve the efficiency of Mixture-of-Experts (MoE) models, focusing on reducing computational overhead or improving expert utilization without sacrificing model quality.",
+      "details": "Propose a method to learn per-token expert sparsity masks that dynamically prune entire experts from the computation graph. Instead of routing tokens to a fixed number of experts, the gate outputs a continuous mask over experts, which is then thresholded to produce a sparse set of active experts. The mask is trained with a sparsity-inducing regularizer (e.g., L0 or hard concrete) to encourage many experts to be completely skipped for each token, reducing FLOPs and communication. This allows the model to automatically discover which experts are redundant for a given input.\nMethod: 1. Replace the top-k routing with a learned gating function that outputs a real-valued mask over all experts (e.g., via a softmax followed by a temperature-scaled sigmoid). 2. Apply a hard threshold (e.g., mask > 0.5) to select a sparse set of experts for each token. 3. Use a sparsity-inducing regularizer (e.g., L0 penalty via hard concrete) to encourage many mask entries to be exactly zero. 4. Train end-to-end with straight-through estimators for the thresholding operation. 5. Evaluate on a small MoE transformer (8 experts) on language modeling, measuring average active experts per token, FLOPs, and perplexity.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:11:41.485415+00:00"
+    },
+    {
+      "entry_id": "idea-2dd95157",
+      "kind": "promising_direction",
+      "summary": "Adaptive routing budget proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Constrain routing decisions with an explicit communication budget.\nMethod: Use a budget-aware gate and analyze tradeoffs.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:22.481852+00:00"
+    },
+    {
+      "entry_id": "idea-9b55238b",
+      "kind": "promising_direction",
+      "summary": "Adaptive routing budget proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Constrain routing decisions with an explicit communication budget.\nMethod: Use a budget-aware gate and analyze tradeoffs.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:41.952779+00:00"
+    }
+  ],
+  "proposal_hits": [
+    {
+      "entry_id": "proposal-57499647",
+      "kind": "proposal_pattern",
+      "summary": "Differentiable Expert Pruning via Learned Sparsity Masks for Efficient Mixture-of-Experts",
+      "goal": "Propose a novel method to improve the efficiency of Mixture-of-Experts (MoE) models, focusing on reducing computational overhead or improving expert utilization without sacrificing model quality.",
+      "details": "Evidence findings: Load imbalance among experts is a primary bottleneck, leading to underutilization and wasted computation.; Communication overhead from all-to-all expert dispatch grows with model parallelism, limiting scaling efficiency.; Static top-k routing often selects redundant experts, increasing FLOPs without proportional quality gains.\nDirection: We propose to replace the fixed top-k routing with a learned gating function that outputs a real-valued mask over all experts. The mask is produced by a softmax followed by a temperature-scaled sigmoid, then thresholded (e.g., mask > 0.5) to select a sparse set of experts per token. A sparsity-inducing regularizer (hard concrete) encourages many mask entries to be exactly zero, effectively pruning entire experts. The thresholding operation is trained with straight-through estimators. This allows",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:11:41.485415+00:00"
+    },
+    {
+      "entry_id": "proposal-6c048ede",
+      "kind": "proposal_pattern",
+      "summary": "Dry-Run Research Proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Evidence findings: System bottlenecks often dominate algorithmic gains.; Proposal quality improves when constraints are explicit.\nDirection: Recommend a budget-aware research direction.",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:22.481852+00:00"
+    },
+    {
+      "entry_id": "proposal-b87487c3",
+      "kind": "proposal_pattern",
+      "summary": "Dry-Run Research Proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Evidence findings: System bottlenecks often dominate algorithmic gains.; Proposal quality improves when constraints are explicit.\nDirection: Recommend a budget-aware research direction.",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:41.952779+00:00"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "idea_a_id": "idea-4",
+    "idea_b_id": "idea-5",
+    "winner_id": "idea-4",
+    "rationale": "Idea A (Narrowing the Lens) is the stronger proposal because it is more feasible and concrete, with a clear mixed-methods approach leveraging existing administrative data and qualitative studies from two well-documented programs. While both ideas have similar novelty and relevance scores, Idea A's focused scope on biometric authentication failures allows for more precise evidence use and actionable findings, whereas Idea B's broader political economy analysis faces greater challenges in causal identification and data granularity. The feasibility advantage of Idea A outweighs the slight edge in clarity for Idea B, making it the better candidate for a deep research system.",
+    "rating_a_before": 1000.0,
+    "rating_b_before": 1000.0,
+    "rating_a_after": 1012.0,
+    "rating_b_after": 988.0
+  },
+  {
+    "idea_a_id": "idea-4",
+    "idea_b_id": "idea-6",
+    "winner_id": "idea-6",
+    "rationale": "Idea B (idea-6) is the stronger proposal. While both ideas are highly feasible and relevant, Idea B achieves higher clarity (9 vs 7) and novelty (7 vs 6) than Idea A. Its mixed-methods design with a primary survey and difference-in-differences strategy offers a more rigorous causal identification of crowding-out effects, and the focus on a single well-documented program (VGD) with existing panel data enhances feasibility without sacrificing depth. The proposal also explicitly addresses a key gap in the literature\u2014how program design features affect crowding-out for the ultra-poor\u2014which adds a fresh angle. In contrast, Idea A's novelty is more limited as biometric exclusion in PM-KISAN and VGD is already well-documented, and its reliance on existing transcripts and proxy indicators introduces measurement risks. Overall, Idea B provides a more balanced and impactful research design.",
+    "rating_a_before": 1012.0,
+    "rating_b_before": 1000.0,
+    "rating_a_after": 999.59,
+    "rating_b_after": 1012.41
+  },
+  {
+    "idea_a_id": "idea-4",
+    "idea_b_id": "idea-7",
+    "winner_id": "idea-4",
+    "rationale": "Idea A (Narrowing the Lens) is the stronger proposal because it is more feasible and directly addresses the user's goal of understanding why programs fail the ultra-poor. It focuses on two well-documented programs with accessible administrative data and existing qualitative studies, reducing the risk of data access issues. While Idea B (Political Economy) is highly relevant and novel, its feasibility is weaker due to challenges in obtaining granular administrative data linked to political alignment and establishing causality. Idea A's concrete, mixed-methods approach is more likely to produce actionable findings within the constraints, despite its lower novelty.",
+    "rating_a_before": 999.59,
+    "rating_b_before": 1000.0,
+    "rating_a_after": 1011.6,
+    "rating_b_after": 987.99
+  },
+  {
+    "idea_a_id": "idea-5",
+    "idea_b_id": "idea-6",
+    "winner_id": "idea-6",
+    "rationale": "Idea B (Narrowing the Lens: A Mixed-Methods Study of Crowding-Out in Bangladesh's VGD Program) is the stronger proposal. It directly addresses the user's goal of understanding why social protection programs are ineffective for the ultra-poor by focusing on a specific, well-documented program and employing a feasible mixed-methods design that can yield causal evidence on a key mechanism (crowding-out of informal transfers). While both ideas have similar relevance and clarity, Idea B scores higher on feasibility (8 vs. 7) and novelty (7 vs. 6), and its total score (8.25) exceeds that of Idea A (7.5). The narrower scope reduces risks and allows for more rigorous analysis, making it more likely to produce actionable insights for improving program effectiveness for the ultra-poor.",
+    "rating_a_before": 988.0,
+    "rating_b_before": 1012.41,
+    "rating_a_after": 976.84,
+    "rating_b_after": 1023.57
+  },
+  {
+    "idea_a_id": "idea-5",
+    "idea_b_id": "idea-7",
+    "winner_id": "idea-7",
+    "rationale": "Both proposals address the same political economy theme with similar relevance and clarity, but Idea B (idea-7) has a higher novelty score (7.0 vs. 6.0) and a stronger ELO rating (987.99 vs. 976.84). While Idea B's feasibility is slightly lower, its more specific comparative case selection and mixed-methods approach (including administrative data analysis) offer a more rigorous and potentially more insightful investigation. The higher novelty indicates a greater contribution beyond existing literature, making it the stronger candidate for a deep research system.",
+    "rating_a_before": 976.84,
+    "rating_b_before": 987.99,
+    "rating_a_after": 965.22,
+    "rating_b_after": 999.61
+  },
+  {
+    "idea_a_id": "idea-6",
+    "idea_b_id": "idea-7",
+    "winner_id": "idea-6",
+    "rationale": "Idea A (Narrowing the Lens) is the stronger proposal because it is more feasible and clearly articulated, with a concrete mixed-methods design that directly addresses the user's goal of understanding program ineffectiveness for the ultra-poor. While both ideas have high relevance, Idea A's focused scope on a single program with existing data and a manageable primary survey makes it more likely to produce robust, actionable insights within realistic constraints. Idea B, though novel in its political economy lens, suffers from significant feasibility risks related to data access and causal identification, which could undermine its execution. The clarity and practicality of Idea A outweigh the moderate novelty advantage of Idea B.",
+    "rating_a_before": 1023.57,
+    "rating_b_before": 999.61,
+    "rating_a_after": 1034.74,
+    "rating_b_after": 988.44
+  }
+]

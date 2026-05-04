@@ -1,0 +1,12 @@
+[
+  {
+    "idea_a_id": "idea-3",
+    "idea_b_id": "idea-5",
+    "winner_id": "idea-5",
+    "rationale": "Idea B (Adaptive Sparse Spline Grids via Differentiable Top-k Pruning) is the stronger candidate. It directly leverages the provided memory hits on learned sparsity and budget regularization, ensuring strong grounding and feasibility within the 3-day constraint. The method is more straightforward to implement in PyTorch with a lightweight gating network and top-k selection, and it explicitly addresses the computational bottleneck of dense grid evaluation with a clear efficiency-accuracy trade-off. While Idea A (low-rank tensor decomposition) is novel, it carries higher implementation risk and hyperparameter sensitivity (rank selection) that may be difficult to manage under the low compute and time budget. Idea B's higher feasibility and direct use of established techniques make it a more practical and impactful proposal for the given constraints.",
+    "rating_a_before": 1000.0,
+    "rating_b_before": 1000.0,
+    "rating_a_after": 988.0,
+    "rating_b_after": 1012.0
+  }
+]

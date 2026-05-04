@@ -1,0 +1,28 @@
+{
+  "ideation_entry": {
+    "entry_id": "idea-266a2fb1",
+    "kind": "promising_direction",
+    "summary": "Narrowing the Lens: A Mixed-Methods Study of Crowding-Out in Bangladesh's VGD Program",
+    "goal": "Investigate the reasons behind the ineffectiveness of social protection programs in South Asia, with a specific focus on their failure to adequately serve the ultra-poor, and identify evidence-based barriers and potential improvements.",
+    "details": "This child directly addresses the feasibility weakness by drastically narrowing the scope to a single, well-documented program\u2014Bangladesh's Vulnerable Group Development (VGD) program\u2014and proposing a mixed-methods design that combines a small-scale primary survey with in-depth qualitative interviews in two distinct regions. By focusing on one program with existing panel data and a clear rollout history, the study can employ a difference-in-differences strategy to estimate crowding-out effects on informal transfers, while qualitative work illuminates mechanisms and household coping strategies. This approach makes the research manageable, reduces measurement error through targeted survey modules, and still yields rich, policy-relevant insights.\nMethod: 1. Select two districts in Bangladesh with varying VGD implementation timelines (one early, one late) and conduct a small-scale household survey (n=400) with modules specifically designed to capture informal transfers (using recall aids, diaries, and proxy reporting). 2. Combine primary survey data with existing panel data from the Bangladesh Integrated Household Survey (BIHS) to construct a difference-in-differences model comparing changes in informal transfers between VGD beneficiaries and non-beneficiaries over time. 3. Conduct 40 semi-structured interviews with ultra-poor households (both VGD participants and non-participants) to understand how they perceive and navigate formal and informal support. 4. Analyze qualitative data thematically to identify mechanisms of crowding-out or complementarity. 5. Synthesize findings into recommendations for program design that minimizes negative spillovers on informal networks.",
+    "tags": [
+      "general",
+      "tree-search",
+      "ema"
+    ],
+    "created_at": "2026-05-04T22:58:15.133785+00:00"
+  },
+  "proposal_entry": {
+    "entry_id": "proposal-ad9540a9",
+    "kind": "proposal_pattern",
+    "summary": "The Political Economy of Ultra-Poor Exclusion: Elite Capture and Patronage in South Asian Social Protection",
+    "goal": "Investigate the reasons behind the ineffectiveness of social protection programs in South Asia, with a specific focus on their failure to adequately serve the ultra-poor, and identify evidence-based barriers and potential improvements.",
+    "details": "Evidence findings: Social protection programs in South Asia frequently suffer from design flaws such as overly complex eligibility criteria and rigid categorical targeting that exclude the ultra-poor, who often lack formal identification or reside in remote areas.; Implementation barriers including corruption, leakage, and weak administrative capacity are pervasive, with benefits often captured by local elites or non-poor households, reducing the effective reach to the ultra-poor.; Political economy factors such as patronage politics and elite capture distort benefit allocation, as programs are used to reward supporters rather than target the most vulnerable, undermining poverty reduction goals.\nDirection: We propose a comparative case study of three programs with contrasting political contexts: India's MGNREGA (decentralized, with strong right-to-work legislation), Pakistan's BISP (centrally administered with a poverty scorecard), and Nepal's social security allowances (politicized, with local discretion). This design leverages variation in institutional design to isolate how political economy factors operate. The analysis will combine quantitative analysis of administrative data (e.g., MGNREGA's",
+    "tags": [
+      "general",
+      "proposal",
+      "ema"
+    ],
+    "created_at": "2026-05-04T22:58:15.133785+00:00"
+  }
+}

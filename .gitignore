@@ -1,0 +1,27 @@
+.DS_Store
+.env
+.pytest_cache/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.claude/
+
+# Local runtime state
+memory/*.json
+demo_workspace/
+live_fast_workspace/
+live_manual_workspace/
+live_smoke_workspace/
+live_test_workspace/
+
+# Temporary render/check artifacts
+tmp/
+tmp_formula_check/
+tmp_formula_check2/
+
+# Common build artifacts
+build/
+dist/
+htmlcov/
+.coverage

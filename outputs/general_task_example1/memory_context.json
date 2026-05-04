@@ -1,0 +1,86 @@
+{
+  "ideation_hits": [
+    {
+      "entry_id": "idea-2dd95157",
+      "kind": "promising_direction",
+      "summary": "Adaptive routing budget proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Constrain routing decisions with an explicit communication budget.\nMethod: Use a budget-aware gate and analyze tradeoffs.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:22.481852+00:00"
+    },
+    {
+      "entry_id": "idea-9b55238b",
+      "kind": "promising_direction",
+      "summary": "Adaptive routing budget proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Constrain routing decisions with an explicit communication budget.\nMethod: Use a budget-aware gate and analyze tradeoffs.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:41.952779+00:00"
+    },
+    {
+      "entry_id": "idea-c3e1203f",
+      "kind": "promising_direction",
+      "summary": "Adaptive routing budget proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Constrain routing decisions with an explicit communication budget.\nMethod: Use a budget-aware gate and analyze tradeoffs.",
+      "tags": [
+        "general",
+        "tree-search",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:16:40.490001+00:00"
+    }
+  ],
+  "proposal_hits": [
+    {
+      "entry_id": "proposal-6c048ede",
+      "kind": "proposal_pattern",
+      "summary": "Dry-Run Research Proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Evidence findings: System bottlenecks often dominate algorithmic gains.; Proposal quality improves when constraints are explicit.\nDirection: Recommend a budget-aware research direction.",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:22.481852+00:00"
+    },
+    {
+      "entry_id": "proposal-b87487c3",
+      "kind": "proposal_pattern",
+      "summary": "Dry-Run Research Proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Evidence findings: System bottlenecks often dominate algorithmic gains.; Proposal quality improves when constraints are explicit.\nDirection: Recommend a budget-aware research direction.",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:09:41.952779+00:00"
+    },
+    {
+      "entry_id": "proposal-88d20609",
+      "kind": "proposal_pattern",
+      "summary": "Dry-Run Research Proposal",
+      "goal": "Produce a grounded deep-research proposal.",
+      "details": "Evidence findings: System bottlenecks often dominate algorithmic gains.; Proposal quality improves when constraints are explicit.\nDirection: Recommend a budget-aware research direction.",
+      "tags": [
+        "general",
+        "proposal",
+        "ema"
+      ],
+      "created_at": "2026-05-04T20:16:40.490001+00:00"
+    }
+  ],
+  "ideation_backend": "embedding",
+  "proposal_backend": "embedding"
+}

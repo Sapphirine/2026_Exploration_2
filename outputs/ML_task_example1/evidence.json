@@ -1,0 +1,28 @@
+{
+  "findings": [
+    "KAN replaces fixed activation functions with learnable B-spline grids, which are the primary source of parameter count and computational cost.",
+    "The spline grid in KAN is a dense 2D tensor (input_dim x num_spline_knots) per layer, making it the most promising target for efficiency improvements.",
+    "Low-rank factorization (e.g., matrix decomposition) can reduce the parameter count of the spline grid by approximating it as a product of smaller matrices.",
+    "Adaptive pruning of spline knots based on activation magnitude can sparsify the grid without significant accuracy loss on smooth synthetic functions.",
+    "Synthetic datasets like high-dimensional polynomial functions or noisy manifolds allow controlled evaluation of efficiency-accuracy trade-offs.",
+    "FLOPs, parameter count, wall-clock time, and validation loss are standard metrics for evaluating efficiency improvements in neural networks.",
+    "PyTorch's autograd and sparse tensor operations can be leveraged to implement low-rank or sparse KAN variants with minimal overhead.",
+    "Existing KAN implementations are modular, allowing easy substitution of the spline grid module for prototyping."
+  ],
+  "tensions": [
+    "Reducing parameter count via low-rank approximation may degrade KAN's ability to model sharp non-linearities in synthetic functions.",
+    "Sparse pruning of spline knots can introduce discontinuities in the learned function, potentially harming accuracy on smooth targets.",
+    "Low-rank factorization adds extra matrix multiplications, which may offset FLOPs savings for small-to-medium models.",
+    "Adaptive pruning requires a threshold hyperparameter, which may need tuning per dataset, increasing the compute budget.",
+    "Synthetic datasets may not fully capture the complexity of real-world data, limiting generalizability of efficiency gains.",
+    "The 3-day time budget restricts extensive hyperparameter search or multi-dataset validation, favoring simpler methods."
+  ],
+  "opportunities": [
+    "Design a hybrid approach: apply low-rank factorization to the spline grid matrix and then prune small singular values to achieve both parameter reduction and sparsity.",
+    "Use a learnable mask on spline knots that is regularized with L1 penalty to induce sparsity during training, maintaining differentiability.",
+    "Validate on a suite of synthetic functions (e.g., polynomial, sinusoidal, high-dimensional additive) to demonstrate robustness of the efficiency method.",
+    "Implement a PyTorch module that replaces the dense spline grid with a low-rank plus sparse decomposition, combining the benefits of both techniques.",
+    "Measure efficiency gains not only in FLOPs and parameters but also in memory footprint and training time per epoch, which are critical for low compute budgets.",
+    "Provide a minimal code skeleton that can be easily extended, enabling rapid prototyping and reproducibility within the 3-day window."
+  ]
+}

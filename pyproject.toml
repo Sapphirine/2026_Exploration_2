@@ -1,0 +1,35 @@
+[project]
+name = "EvoResearcher"
+version = "0.1.0"
+description = "Interactive deep research proposal agent with LangGraph, Rich TUI, dual memory, and DeepSeek."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4>=4.12",
+    "httpx>=0.28",
+    "langgraph>=0.2",
+    "pydantic>=2.8",
+    "prompt_toolkit>=3.0",
+    "python-dotenv>=1.0",
+    "reportlab>=4.0",
+    "rich>=13.7",
+    "sentence-transformers>=3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+evoresearcher = "evoresearcher.main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["evoresearcher*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

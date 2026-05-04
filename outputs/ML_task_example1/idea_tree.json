@@ -1,0 +1,86 @@
+[
+  {
+    "idea_id": "idea-1",
+    "title": "Adaptive Spline Grid Pruning via Learned Sparsity Masks for Efficient KAN",
+    "summary": "Propose to learn per-spline-grid-point sparsity masks that dynamically prune individual B-spline control points from the computation graph of KAN. Instead of using a fixed dense grid of spline coefficients for each activation function, the model learns a continuous mask over the grid points, which is thresholded to produce a sparse set of active coefficients. The mask is trained with a sparsity-inducing regularizer (e.g., L0 via hard concrete) to encourage many grid points to be exactly zero, reducing the number of floating-point operations and memory footprint during forward and backward passes. This allows the network to automatically discover which spline coefficients are redundant for a given input or task, maintaining accuracy while improving efficiency.",
+    "method_outline": "1. Replace the standard dense B-spline grid in each KAN layer with a learnable mask vector of the same length (number of grid points). 2. The mask is produced by a small gating network (e.g., a linear layer with sigmoid) that takes the input activation as context, or alternatively a global learnable mask per activation function. 3. Apply a hard threshold (e.g., mask > 0.5) to select a sparse subset of grid points for each activation. 4. Use a sparsity-inducing regularizer (e.g., L0 penalty via hard concrete) to encourage many mask entries to be exactly zero. 5. Train end-to-end with straight-through estimators for the thresholding operation. 6. Evaluate on synthetic regression tasks (e.g., high-dimensional polynomial, noisy manifold) and classification tasks (e.g., synthetic moons, circles). 7. Measure FLOPs, parameter count, wall-clock time, and validation loss compared to a dense KAN baseline.",
+    "evidence_use": "The memory hit on 'Differentiable Expert Pruning via Learned Sparsity Masks' provides a direct analog: applying learned sparsity masks to prune entire experts in MoE. Here, we adapt the same principle to prune individual spline grid points in KAN, which is a more fine-grained and novel application. The idea of using hard concrete and straight-through estimators is directly transferable.",
+    "risks": [
+      "The gating network may add overhead that offsets efficiency gains for small models.",
+      "Sparsity may degrade accuracy on tasks requiring fine-grained function approximation.",
+      "Training stability with straight-through estimators on spline coefficients may be tricky."
+    ],
+    "novelty": 7.0,
+    "importance": 8.0,
+    "grounding": 7.0,
+    "feasibility": 7.0,
+    "total_score": 7.3,
+    "elo_rating": 1000.0,
+    "review_rationale": "The idea adapts a known technique (learned sparsity masks with hard concrete) from MoE pruning to a new domain (KAN spline grid points), which is a novel transfer. It addresses a real efficiency bottleneck in KAN (dense spline grids) and is grounded in existing literature. The feasibility is high given the 3-day PyTorch constraint, as the method can be implemented with standard components. Risks are acknowledged and manageable. Overall, the proposal is well-scoped and promising.",
+    "parent_id": null,
+    "depth": 0
+  },
+  {
+    "idea_id": "idea-2",
+    "title": "Low-Rank Tensor Decomposition of KAN Spline Grids for Parameter-Efficient Training",
+    "summary": "Propose to factorize the 3D tensor of spline coefficients (input_dim x output_dim x grid_points) in each KAN layer as a low-rank CP (CANDECOMP/PARAFAC) decomposition. Instead of storing a full dense grid for each activation pair, we represent the grid as a sum of R rank-1 components, where R is a small integer (e.g., 4-16). This drastically reduces the number of parameters and FLOPs during forward/backward passes, as the spline evaluation can be computed efficiently using the factorized form. The low-rank structure is learned end-to-end with standard backpropagation, and the rank R can be tuned as a hyperparameter or learned via a rank-selection regularizer. This approach is particularly effective for medium-scale KANs where the grid size dominates the parameter count.",
+    "method_outline": "1. For each KAN layer, let the spline coefficients be a 3D tensor of shape (in_features, out_features, grid_size). 2. Approximate this tensor as a sum of R rank-1 components: C = sum_{r=1}^R a_r \u2297 b_r \u2297 c_r, where a_r, b_r, c_r are vectors of length in_features, out_features, grid_size respectively. 3. Implement the forward pass using the factorized form: the spline output for a given input is computed by first projecting the input onto the factor matrices, then combining with the grid factors. 4. Train end-to-end with standard SGD/Adam. 5. Optionally add a nuclear norm or L1 regularizer on the factors to encourage low rank. 6. Evaluate on synthetic regression tasks (e.g., high-dimensional polynomial, noisy manifold) and classification tasks (e.g., synthetic moons, circles). 7. Measure parameter count, FLOPs, wall-clock time, and validation loss compared to a dense KAN baseline.",
+    "evidence_use": "The memory hits on 'Adaptive routing budget proposal' and 'Dry-Run Research Proposal' emphasize the importance of system bottlenecks and budget-aware design. Low-rank decomposition directly addresses the parameter and compute budget by reducing the number of spline coefficients. This is a classic technique in tensor methods (e.g., for neural network compression) but has not been applied to KAN's spline grids.",
+    "risks": [
+      "Low-rank approximation may not capture complex activation functions, leading to accuracy loss.",
+      "The factorized forward pass may introduce numerical instability or slower convergence.",
+      "Choosing the rank R requires careful tuning; too low loses accuracy, too high reduces efficiency gains."
+    ],
+    "novelty": 7.0,
+    "importance": 8.0,
+    "grounding": 8.0,
+    "feasibility": 7.0,
+    "total_score": 7.55,
+    "elo_rating": 1000.0,
+    "review_rationale": "The idea applies low-rank tensor decomposition (CP) to KAN's spline coefficient tensor, which is a novel adaptation of a well-known compression technique to a recently proposed architecture. It directly addresses the computational bottleneck of KAN (the dense spline grid) and is well-grounded in tensor factorization literature. The feasibility is high given the 3-day constraint and PyTorch implementation, though careful tuning of rank and potential accuracy loss are risks. The proposal aligns with the user's goal of improving KAN efficiency under low compute budget.",
+    "parent_id": null,
+    "depth": 0
+  },
+  {
+    "idea_id": "idea-3",
+    "title": "Low-Rank Tensor Decomposition of Spline Grids for Compact KAN Activations",
+    "summary": "Propose to factorize the 3D tensor of B-spline coefficients (layer_input_dim x layer_output_dim x grid_points) into low-rank components (e.g., via CP or Tucker decomposition) to drastically reduce parameter count and FLOPs. Instead of storing a full grid for each input-output pair, we learn a small set of basis grids and a low-rank mixing matrix, enabling efficient forward/backward passes while preserving the expressive power of spline activations. This is particularly effective for medium-scale KANs where the grid dimension is large.",
+    "method_outline": "1. Represent the spline coefficient tensor C of shape [in_dim, out_dim, G] (G = number of grid points) as a low-rank CP decomposition: C \u2248 sum_{r=1}^R a_r \u2297 b_r \u2297 c_r, where a_r \u2208 R^{in_dim}, b_r \u2208 R^{out_dim}, c_r \u2208 R^G. 2. Replace the dense grid lookup with a series of cheap tensor contractions: for input x, compute activation output as sum_r (a_r \u00b7 x) * b_r * (c_r \u00b7 B(x)), where B(x) is the B-spline basis evaluated at x. 3. Train end-to-end with standard backprop; optionally add a rank-regularization term (e.g., nuclear norm proxy) to automatically determine R. 4. Evaluate on synthetic regression (e.g., high-dimensional polynomial, additive functions) and classification (e.g., synthetic moons, circles). 5. Compare against dense KAN and the adaptive pruning baseline in terms of parameter count, FLOPs, wall-clock time, and validation loss.",
+    "evidence_use": "The memory hit on 'Differentiable Expert Pruning via Learned Sparsity Masks' is not directly used here; instead, we draw inspiration from tensor decomposition methods widely used in compact neural networks (e.g., CP-decomposition for conv layers). This is a novel application to KAN's spline grids, which are naturally tensorial. The idea is grounded in the literature on low-rank approximations for neural network compression.",
+    "risks": [
+      "Low-rank assumption may not hold for complex functions requiring fine-grained grid variations.",
+      "Choosing the rank R introduces a hyperparameter; too low rank may hurt accuracy, too high may reduce efficiency gains.",
+      "Tensor decomposition may complicate gradient computation and increase implementation complexity within 3 days."
+    ],
+    "novelty": 8.0,
+    "importance": 8.0,
+    "grounding": 7.0,
+    "feasibility": 6.0,
+    "total_score": 7.35,
+    "elo_rating": 1000.0,
+    "review_rationale": "The idea of applying low-rank tensor decomposition to KAN's spline coefficient tensor is novel, as no prior work has explored this for KAN efficiency. It is important because it could drastically reduce parameter count and FLOPs, addressing a key bottleneck in KAN scalability. Grounding is solid, drawing from established tensor decomposition methods in neural network compression, though direct evidence for KAN is absent. Feasibility is moderate: a simple CP decomposition is implementable in PyTorch within 3 days, but risks include rank sensitivity and implementation complexity. Overall, a promising direction with manageable risks.",
+    "parent_id": "idea-1",
+    "depth": 1
+  },
+  {
+    "idea_id": "idea-5",
+    "title": "Adaptive Sparse Spline Grids via Differentiable Top-k Pruning with Budget Regularization",
+    "summary": "Instead of using a dense spline grid for every input-output pair in a KAN layer, we propose to learn a per-activation sparsity mask over the grid points. The mask is produced by a lightweight gating network that takes the input activation and outputs a binary-like mask over the grid indices. A top-k selection (with k being a fraction of the grid size) is applied during the forward pass, and the mask is trained with a straight-through estimator and a budget regularizer (e.g., L0 penalty via hard concrete) to enforce a target sparsity level. This dynamically prunes unnecessary grid points for each input, reducing the number of spline evaluations and the memory footprint of the coefficient tensor. The approach is inspired by learned sparsity in MoE routing (memory hits on 'Differentiable Expert Pruning via Learned Sparsity Masks' and 'Adaptive routing budget proposal') but adapted to the per-activation grid point level in KAN.",
+    "method_outline": "1. For each KAN layer, maintain a dense spline coefficient tensor of shape (in_features, out_features, grid_size). 2. Introduce a lightweight gating network (e.g., a single linear layer + softmax) that takes the input activation (in_features) and outputs a score vector of length grid_size for each output feature. 3. For each output feature, apply a top-k selection (k = fraction * grid_size) to obtain a binary mask over grid points. 4. During forward pass, evaluate the spline only on the selected grid points and aggregate the results. 5. Use a straight-through estimator for the top-k thresholding to allow gradient flow. 6. Add a budget regularizer (e.g., L0 penalty via hard concrete) to encourage the average number of active grid points per activation to be low. 7. Train end-to-end with Adam on synthetic regression/classification tasks. 8. Compare against dense KAN and a random pruning baseline. 9. Measure FLOPs, parameter count (including gating network), wall-clock time, and validation loss.",
+    "evidence_use": "The memory hits on 'Differentiable Expert Pruning via Learned Sparsity Masks' and 'Adaptive routing budget proposal' directly inspire the use of learned sparsity masks with budget regularization. The idea of per-token expert pruning is translated to per-activation grid point pruning in KAN. The budget-aware design aligns with the system bottleneck emphasis from the 'Dry-Run Research Proposal' memory hit.",
+    "risks": [
+      "The gating network adds extra parameters and compute, potentially offsetting the gains from sparsity.",
+      "Top-k selection may be unstable during training, especially with small grid sizes.",
+      "The sparsity pattern may not generalize well across different inputs, leading to accuracy loss."
+    ],
+    "novelty": 7.5,
+    "importance": 8.0,
+    "grounding": 8.0,
+    "feasibility": 7.0,
+    "total_score": 7.68,
+    "elo_rating": 1000.0,
+    "review_rationale": "The idea adapts a recent MoE efficiency technique (learned sparsity masks with budget regularization) to KAN's spline grids, which is a novel cross-architecture transfer. It directly addresses the computational bottleneck of dense grid evaluation and is well-grounded in the provided memory hits. The feasibility is moderate due to the need for careful tuning of the gating network and top-k selection, but the 3-day constraint is manageable with a small-scale synthetic setup. The risks are acknowledged and can be mitigated with ablation studies.",
+    "parent_id": "idea-2",
+    "depth": 1
+  }
+]

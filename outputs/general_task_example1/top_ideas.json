@@ -1,0 +1,73 @@
+[
+  {
+    "idea_id": "idea-6",
+    "title": "Narrowing the Lens: A Mixed-Methods Study of Crowding-Out in Bangladesh's VGD Program",
+    "summary": "This child directly addresses the feasibility weakness by drastically narrowing the scope to a single, well-documented program\u2014Bangladesh's Vulnerable Group Development (VGD) program\u2014and proposing a mixed-methods design that combines a small-scale primary survey with in-depth qualitative interviews in two distinct regions. By focusing on one program with existing panel data and a clear rollout history, the study can employ a difference-in-differences strategy to estimate crowding-out effects on informal transfers, while qualitative work illuminates mechanisms and household coping strategies. This approach makes the research manageable, reduces measurement error through targeted survey modules, and still yields rich, policy-relevant insights.",
+    "method_outline": "1. Select two districts in Bangladesh with varying VGD implementation timelines (one early, one late) and conduct a small-scale household survey (n=400) with modules specifically designed to capture informal transfers (using recall aids, diaries, and proxy reporting). 2. Combine primary survey data with existing panel data from the Bangladesh Integrated Household Survey (BIHS) to construct a difference-in-differences model comparing changes in informal transfers between VGD beneficiaries and non-beneficiaries over time. 3. Conduct 40 semi-structured interviews with ultra-poor households (both VGD participants and non-participants) to understand how they perceive and navigate formal and informal support. 4. Analyze qualitative data thematically to identify mechanisms of crowding-out or complementarity. 5. Synthesize findings into recommendations for program design that minimizes negative spillovers on informal networks.",
+    "evidence_use": "Primary survey data collected specifically for this study, supplemented by the BIHS panel (2015, 2018 waves) and administrative data from the VGD program. Qualitative evidence from semi-structured interviews. The analysis will use difference-in-differences with fixed effects to control for time-invariant unobservables, and robustness checks including placebo tests and alternative informal transfer definitions.",
+    "risks": [
+      "Small sample size may limit statistical power to detect modest crowding-out effects.",
+      "Recall bias remains a challenge even with improved survey modules.",
+      "Selection bias in VGD participation may confound causal estimates despite difference-in-differences.",
+      "Findings may not generalize beyond Bangladesh or the VGD program."
+    ],
+    "novelty": 7.0,
+    "feasibility": 8.0,
+    "relevance": 9.0,
+    "clarity": 9.0,
+    "total_score": 8.25,
+    "elo_rating": 1034.74,
+    "review_feedback": "The proposal is highly feasible, relevant, and clearly articulated. The weakest dimension is novelty, as crowding-out of informal transfers by formal programs is a well-studied phenomenon in development economics, and applying it to Bangladesh's VGD program, while contextually valuable, does not introduce a new theoretical or methodological angle. To strengthen novelty, consider framing the study around an underexplored mechanism\u2014such as how program design features (e.g., conditionality, transfer size, or duration) differentially affect crowding-out for ultra-poor versus moderate-poor households, or how gender dynamics within households mediate the crowding-out effect. Alternatively, you could focus on a specific type of informal transfer (e.g., in-kind vs. cash, or transfers from different network types) that has been less studied. This would build on existing literature while offering a fresh contribution.",
+    "weakest_dimension": "novelty",
+    "relation_to_parent": "refine_weak_dimension",
+    "parent_id": "idea-3",
+    "depth": 2
+  },
+  {
+    "idea_id": "idea-4",
+    "title": "Narrowing the Lens: Exclusion from Biometric Authentication in India's PM-KISAN and Bangladesh's VGD Programs",
+    "summary": "This child directly addresses the feasibility weakness by narrowing the scope to two well-documented programs\u2014India's PM-KISAN (Aadhaar-linked cash transfers) and Bangladesh's VGD (digitized G2P payments)\u2014where administrative data and qualitative studies are more accessible. It focuses specifically on biometric authentication failures as a measurable barrier for the ultra-poor, using established systems with longer track records to mitigate time-sensitivity. The proposal triangulates evidence from government audit reports, existing ethnographic studies, and targeted interviews with frontline workers to isolate digital exclusion effects.",
+    "method_outline": "1. Systematic review of literature (2015-2023) on biometric authentication exclusion in PM-KISAN and VGD, prioritizing studies with disaggregated ultra-poor data. 2. Quantitative analysis of administrative data (e.g., NITI Aayog reports on PM-KISAN exclusion, Bangladesh's VGD beneficiary surveys) to compute exclusion rates pre- and post-digitization, stratified by ultra-poor proxies (landlessness, female-headed households). 3. Qualitative analysis of 20-30 semi-structured interviews with frontline workers (e.g., Common Service Centre operators, VGD field officers) and ultra-poor beneficiaries (using existing interview transcripts from published studies) to document lived barriers. 4. Comparative policy analysis of mitigation measures (e.g., offline authentication, assisted registration) and their documented effectiveness in these two programs.",
+    "evidence_use": "Draws on government audit reports (e.g., CAG India reports on PM-KISAN, Bangladesh's IMED evaluations), academic studies (Khera 2019, Dr\u00e8ze 2020 on Aadhaar exclusion; Ahmed et al. 2022 on VGD digitization), and impact evaluations (J-PAL/3ie studies on biometric transfers). Evidence is critically appraised for methodological rigor and contextual specificity, and used to map causal pathways from biometric design to ultra-poor exclusion.",
+    "risks": [
+      "Administrative data may still lack ultra-poor disaggregation; reliance on proxy indicators (e.g., landlessness) may introduce measurement error.",
+      "Interviews with ultra-poor beneficiaries may be limited to existing transcripts; new data collection may be infeasible within scope.",
+      "Findings may be specific to these two programs and not fully generalizable across South Asia."
+    ],
+    "novelty": 6.0,
+    "feasibility": 8.0,
+    "relevance": 9.0,
+    "clarity": 7.0,
+    "total_score": 7.5,
+    "elo_rating": 1011.6,
+    "review_feedback": "The proposal is highly relevant and feasible, with a clear focus on two well-documented programs and a mixed-methods approach that leverages existing data. However, the novelty is limited: the exclusion of ultra-poor populations from biometric authentication in Indian and Bangladeshi social programs has been extensively documented (e.g., Khera 2019, Dr\u00e8ze 2020, Ahmed et al. 2022). To strengthen novelty, consider adding a comparative dimension that is less explored, such as analyzing how the design of mitigation measures (e.g., offline authentication, assisted registration) differs between the two programs and what explains their differential effectiveness. Alternatively, you could examine the political economy of why these exclusionary designs persist despite known flaws, or investigate the coping strategies ultra-poor households adopt when excluded. This would move the proposal from documenting a known problem to generating new insights about mechanisms or solutions.",
+    "weakest_dimension": "novelty",
+    "relation_to_parent": "refine_weak_dimension",
+    "parent_id": "idea-2",
+    "depth": 2
+  },
+  {
+    "idea_id": "idea-7",
+    "title": "The Political Economy of Ultra-Poor Exclusion: Elite Capture and Patronage in South Asian Social Protection",
+    "summary": "This alternative direction shifts the focus from informal safety nets to the political economy factors that systematically exclude the ultra-poor from formal social protection. Instead of examining crowding-out, it investigates how elite capture, patronage politics, and bureaucratic discretion shape targeting and benefit distribution, leading to the exclusion of the most vulnerable. This angle is directly relevant to the user's core question about ineffectiveness for the ultra-poor, and it leverages a rich body of political science and public administration literature. The method relies on comparative case studies of program implementation across different political contexts in South Asia, using process tracing and analysis of administrative data on benefit allocation.",
+    "method_outline": "1. Select three social protection programs with contrasting political contexts: India's MGNREGA (decentralized, with strong right-to-work legislation), Pakistan's Benazir Income Support Programme (BISP, centrally administered with a poverty scorecard), and Nepal's social security allowances (politicized, with local discretion). 2. Conduct a systematic review of existing qualitative and quantitative studies on elite capture and patronage in these programs. 3. Analyze administrative data (e.g., BISP's National Socio-Economic Registry, MGNREGA's MIS) to identify patterns of benefit allocation correlated with political alignment (e.g., voting patterns, party affiliation of local officials). 4. Use process tracing in two subnational case studies per program (one with high elite capture, one with low) to understand mechanisms. 5. Synthesize findings into a typology of exclusion mechanisms and policy recommendations for depoliticizing targeting.",
+    "evidence_use": "Administrative data from program registries and management information systems (MIS), combined with electoral data and qualitative evidence from published case studies and field reports. The analysis will use descriptive statistics and regression analysis to test for political bias in benefit allocation, and process tracing to establish causal mechanisms. Key sources include studies by Besley et al. (on MGNREGA), Cheema et al. (on BISP), and Sharma (on Nepal).",
+    "risks": [
+      "Administrative data may not capture informal political pressures or elite capture at the local level.",
+      "Establishing causality between political alignment and benefit allocation is challenging due to endogeneity.",
+      "Findings may be context-specific and not easily generalizable across South Asia.",
+      "Risk of over-reliance on a few well-studied programs, potentially missing important variation."
+    ],
+    "novelty": 7.0,
+    "feasibility": 6.0,
+    "relevance": 9.0,
+    "clarity": 8.0,
+    "total_score": 7.5,
+    "elo_rating": 988.44,
+    "review_feedback": "The proposal is highly relevant to the user's core question about why social protection programs fail the ultra-poor, and it clearly articulates a political economy lens that is often underexplored. The comparative case selection (India, Pakistan, Nepal) is well-justified and the mixed-methods approach (administrative data analysis plus process tracing) is appropriate. However, feasibility is the weakest dimension. The main risk is access to granular administrative data linked to political alignment (e.g., voting patterns at the individual or household level), which is often not publicly available or may have serious privacy and ethical constraints. Additionally, establishing causality between political alignment and benefit allocation is notoriously difficult due to endogeneity (e.g., programs may be placed in areas that already support the ruling party). To strengthen feasibility, consider focusing on subnational variation within a single country where data access is more feasible (e.g., using MGNREGA's publicly available MIS data combined with village-level election results), or propose a more limited qualitative comparative analysis that relies on existing case studies and key informant interviews rather than attempting to link administrative and electoral data directly. Acknowledging these data access and causal identification challenges more explicitly in the proposal would also improve credibility.",
+    "weakest_dimension": "feasibility",
+    "relation_to_parent": "alternative_direction",
+    "parent_id": "idea-3",
+    "depth": 2
+  }
+]

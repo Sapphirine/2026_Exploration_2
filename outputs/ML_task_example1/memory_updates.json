@@ -1,0 +1,28 @@
+{
+  "ideation_entry": {
+    "entry_id": "idea-ee6868e3",
+    "kind": "promising_direction",
+    "summary": "Adaptive Sparse Spline Grids via Differentiable Top-k Pruning with Budget Regularization",
+    "goal": "Propose a novel method to improve the computational efficiency of Kolmogorov-Arnold Networks (KAN) for medium-scale models on synthetic datasets, using low compute budget and PyTorch, within 3 days.",
+    "details": "Instead of using a dense spline grid for every input-output pair in a KAN layer, we propose to learn a per-activation sparsity mask over the grid points. The mask is produced by a lightweight gating network that takes the input activation and outputs a binary-like mask over the grid indices. A top-k selection (with k being a fraction of the grid size) is applied during the forward pass, and the mask is trained with a straight-through estimator and a budget regularizer (e.g., L0 penalty via hard concrete) to enforce a target sparsity level. This dynamically prunes unnecessary grid points for each input, reducing the number of spline evaluations and the memory footprint of the coefficient tensor. The approach is inspired by learned sparsity in MoE routing (memory hits on 'Differentiable Expert Pruning via Learned Sparsity Masks' and 'Adaptive routing budget proposal') but adapted to the per-activation grid point level in KAN.\nMethod: 1. For each KAN layer, maintain a dense spline coefficient tensor of shape (in_features, out_features, grid_size). 2. Introduce a lightweight gating network (e.g., a single linear layer + softmax) that takes the input activation (in_features) and outputs a score vector of length grid_size for each output feature. 3. For each output feature, apply a top-k selection (k = fraction * grid_size) to obtain a binary mask over grid points. 4. During forward pass, evaluate the spline only on the selected grid points and aggregate the results. 5. Use a straight-through estimator for the top-k thresholding to allow gradient flow. 6. Add a budget regularizer (e.g., L0 penalty via hard concrete) to encourage the average number of active grid points per activation to be low. 7. Train end-to-end with Adam on synthetic regression/classification tasks. 8. Compare against dense KAN and a random pruning baseline. 9. Measure FLOPs, parameter count (including gating network), wall-clock time, and validation loss.",
+    "tags": [
+      "ml",
+      "tree-search",
+      "ema"
+    ],
+    "created_at": "2026-05-04T21:09:27.232651+00:00"
+  },
+  "proposal_entry": {
+    "entry_id": "proposal-8739dc7a",
+    "kind": "proposal_pattern",
+    "summary": "Low-Rank Plus Sparse Decomposition for Efficient Kolmogorov-Arnold Networks",
+    "goal": "Propose a novel method to improve the computational efficiency of Kolmogorov-Arnold Networks (KAN) for medium-scale models on synthetic datasets, using low compute budget and PyTorch, within 3 days.",
+    "details": "Evidence findings: KAN replaces fixed activation functions with learnable B-spline grids, which are the primary source of parameter count and computational cost.; The spline grid in KAN is a dense 2D tensor (input_dim x num_spline_knots) per layer, making it the most promising target for efficiency improvements.; Low-rank factorization (e.g., matrix decomposition) can reduce the parameter count of the spline grid by approximating it as a product of smaller matrices.\nDirection: We propose a hybrid decomposition of the spline coefficient tensor C \u2208 R^{I\u00d7O\u00d7G} into a low-rank component (via CP decomposition with rank R) and a sparse residual: C \u2248 \u03a3_{r=1}^R a_r \u2297 b_r \u2297 c_r + S, where S is a sparse tensor with sparsity level s. The low-rank part captures global structure, while the sparse part models fine-grained deviations. Forward pass: for input x, output = \u03a3_r (a_r\u00b7x) * b_r * (c_r\u00b7B(x)) + sparse_eval(x, S). The sparse component uses a learnable mask with L1 regularizati",
+    "tags": [
+      "ml",
+      "proposal",
+      "ema"
+    ],
+    "created_at": "2026-05-04T21:09:27.232651+00:00"
+  }
+}
