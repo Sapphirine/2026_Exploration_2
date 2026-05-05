@@ -15,6 +15,10 @@ live_manual_workspace/
 live_smoke_workspace/
 live_test_workspace/
 
+# Per-run benchmark artifacts (regeneratable; per-task summary CSVs and
+# rubric-judge JSONL under benchmarks/drb2/results/ ARE kept).
+benchmarks/drb2/runs/
+
 # Temporary render/check artifacts
 tmp/
 tmp_formula_check/
