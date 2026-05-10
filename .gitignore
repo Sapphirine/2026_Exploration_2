@@ -9,11 +9,16 @@ __pycache__/
 
 # Local runtime state
 memory/*.json
+memory.pilot.bak.*/
 demo_workspace/
 live_fast_workspace/
 live_manual_workspace/
 live_smoke_workspace/
 live_test_workspace/
+
+# Timestamped one-off run outputs; outputs/general_task_example1 and
+# outputs/ML_task_example1 are curated examples and ARE kept.
+outputs/[0-9]*/
 
 # Per-run benchmark artifacts (regeneratable; per-task summary CSVs and
 # rubric-judge JSONL under benchmarks/drb2/results/ ARE kept).

@@ -4,11 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 import json
+import logging
 import re
 import shutil
 import subprocess
 
 from evoresearcher.schemas import ReportSections, ResearchBrief
+
+logger = logging.getLogger(__name__)
 
 
 def render_outputs(
@@ -23,17 +26,23 @@ def render_outputs(
     tex_path = run_dir / "research_report.tex"
     md_path = run_dir / "research_report.md"
     pdf_path = run_dir / "research_report.pdf"
-    normalized_report = _normalize_report_sections(report)
-    tex_path.write_text(_build_latex(brief=brief, report=normalized_report, author_line=author_line))
     md_path.write_text(_build_markdown(brief=brief, report=report))
-    _compile_pdf(tex_path=tex_path, pdf_path=pdf_path)
+    try:
+        normalized_report = _normalize_report_sections(report)
+        tex_path.write_text(_build_latex(brief=brief, report=normalized_report, author_line=author_line))
+        pdf_compiled = _compile_pdf(tex_path=tex_path, pdf_path=pdf_path)
+    except Exception as exc:
+        logger.warning("LaTeX rendering raised %s; markdown is still available.", type(exc).__name__)
+        pdf_compiled = False
     (run_dir / "sources.json").write_text(json.dumps(sources, indent=2))
     (run_dir / "top_ideas.json").write_text(json.dumps(top_ideas, indent=2))
-    return {
-        "tex_path": str(tex_path),
+    artifacts = {
+        "tex_path": str(tex_path) if tex_path.exists() else "",
         "markdown_path": str(md_path),
-        "pdf_path": str(pdf_path),
     }
+    if pdf_compiled and pdf_path.exists():
+        artifacts["pdf_path"] = str(pdf_path)
+    return artifacts
 
 
 def _escape_latex(text: str) -> str:
@@ -272,21 +281,32 @@ def _build_markdown(*, brief: ResearchBrief, report: ReportSections) -> str:
 """
 
 
-def _compile_pdf(*, tex_path: Path, pdf_path: Path) -> None:
+def _compile_pdf(*, tex_path: Path, pdf_path: Path) -> bool:
+    """Compile tex to PDF. Returns True on success, False (with a warning logged) on failure."""
     tectonic = shutil.which("tectonic")
     if tectonic is None:
-        raise RuntimeError("tectonic is required to compile LaTeX reports.")
+        logger.warning("tectonic not on PATH; skipping PDF compile for %s", tex_path.name)
+        return False
     log_path = tex_path.with_suffix(".compile.log")
-    result = subprocess.run(
-        [tectonic, "--keep-logs", "--outdir", str(tex_path.parent), str(tex_path)],
-        capture_output=True,
-        text=True,
-    )
+    try:
+        result = subprocess.run(
+            [tectonic, "--keep-logs", "--outdir", str(tex_path.parent), str(tex_path)],
+            capture_output=True,
+            text=True,
+        )
+    except OSError as exc:
+        logger.warning("tectonic invocation failed (%s); skipping PDF compile.", exc)
+        return False
     log_path.write_text(result.stdout + "\n\n" + result.stderr)
     if result.returncode != 0:
-        raise RuntimeError(
-            f"LaTeX compilation failed for {tex_path.name}. See {log_path}."
+        logger.warning(
+            "LaTeX compilation failed for %s (returncode=%d). See %s.",
+            tex_path.name,
+            result.returncode,
+            log_path,
         )
+        return False
     generated_pdf = tex_path.with_suffix(".pdf")
     if generated_pdf != pdf_path:
         generated_pdf.replace(pdf_path)
+    return True

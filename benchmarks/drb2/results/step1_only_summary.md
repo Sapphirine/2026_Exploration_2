@@ -1,0 +1,27 @@
+# DRB-II pilot results (DeepSeek-as-judge)
+
+## Per-label summary (mean ± std across tasks)
+
+| Label | N | Info Recall | Analysis | Presentation | Total |
+|---|---|---|---|---|---|
+| evoresearcher_n3 | 15 | 14.2% ± 12.2 | 23.9% ± 25.1 | 91.3% ± 10.4 | 23.1% ± 12.4 |
+
+## Per-task breakdown
+
+| Label | idx | Recall | Analysis | Presentation | Total | Rubrics |
+|---|---|---|---|---|---|---|
+| evoresearcher_n3 | 4 | 9.4% | 0.0% | 100.0% | 18.1% | 72 |
+| evoresearcher_n3 | 4 | 20.8% | 27.3% | 87.5% | 29.2% | 72 |
+| evoresearcher_n3 | 4 | 5.7% | 27.3% | 100.0% | 19.4% | 72 |
+| evoresearcher_n3 | 16 | 16.2% | 25.0% | 100.0% | 23.1% | 52 |
+| evoresearcher_n3 | 16 | 18.9% | 83.3% | 100.0% | 38.5% | 52 |
+| evoresearcher_n3 | 16 | 24.3% | 66.7% | 100.0% | 38.5% | 52 |
+| evoresearcher_n3 | 42 | 8.5% | 33.3% | 85.7% | 22.7% | 75 |
+| evoresearcher_n3 | 42 | 46.8% | 19.0% | 85.7% | 42.7% | 75 |
+| evoresearcher_n3 | 42 | 8.5% | 4.8% | 85.7% | 14.7% | 75 |
+| evoresearcher_n3 | 52 | 20.0% | 21.4% | 100.0% | 29.1% | 55 |
+| evoresearcher_n3 | 52 | 8.6% | 7.1% | 100.0% | 18.2% | 55 |
+| evoresearcher_n3 | 52 | 22.9% | 42.9% | 100.0% | 36.4% | 55 |
+| evoresearcher_n3 | 68 | 2.1% | 0.0% | 75.0% | 6.7% | 60 |
+| evoresearcher_n3 | 68 | 0.0% | 0.0% | 75.0% | 5.0% | 60 |
+| evoresearcher_n3 | 68 | 0.0% | 0.0% | 75.0% | 5.0% | 60 |

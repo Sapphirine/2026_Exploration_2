@@ -1,0 +1,2 @@
+label,n_tasks,info_recall_mean,info_recall_std,analysis_mean,analysis_std,presentation_mean,presentation_std,total_mean,total_std
+evoresearcher_noelo_n3,15,0.08466622957188995,0.10092649258271198,0.22503607503607503,0.30398418278760425,0.7515873015873016,0.32409034774880485,0.17746879046879047,0.14134155341136226

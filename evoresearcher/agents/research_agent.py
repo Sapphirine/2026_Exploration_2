@@ -52,6 +52,19 @@ class IdeaExpansion(BaseModel):
     alternative_direction_child: ChildIdea
 
 
+class BlindChildIdea(BaseModel):
+    title: str
+    summary: str
+    method_outline: str
+    evidence_use: str
+    risks: list[str] = Field(default_factory=list)
+
+
+class BlindIdeaExpansion(BaseModel):
+    child_a: BlindChildIdea
+    child_b: BlindChildIdea
+
+
 class PairwiseJudgement(BaseModel):
     winner_id: str
     rationale: str
@@ -74,6 +87,9 @@ class ResearchAgent:
         llm: LLMClient,
         ideation_memory: JSONMemoryStore,
         proposal_memory: JSONMemoryStore,
+        *,
+        expansion_blind: bool = False,
+        skip_elo: bool = False,
     ):
         self.config = config
         self.llm = llm
@@ -81,6 +97,8 @@ class ResearchAgent:
         self.proposal_memory = proposal_memory
         self.web = WebResearcher()
         self._counter = count(1)
+        self.expansion_blind = expansion_blind
+        self.skip_elo = skip_elo
 
     def run(self, brief: ResearchBrief, observer=None) -> ResearchRunResult:
         memory_hits = self.ideation_memory.query(brief.reframed_goal, top_k=3)
@@ -105,15 +123,22 @@ class ResearchAgent:
             observer.set_phase("ranking", "running elo tournament over leaf proposals")
             observer.metric("tree_nodes", len(idea_tree))
             observer.metric("leaf_nodes", len(leaf_ideas))
-        ranked_ideas, elo_matches = run_elo_tournament(
-            leaf_ideas,
-            judge_fn=lambda idea_a, idea_b: self._judge_pair(
-                brief=brief,
-                idea_a=idea_a,
-                idea_b=idea_b,
-                sources=sources,
-            ),
-        )
+        if self.skip_elo:
+            ranked_ideas = sorted(
+                (idea.model_copy(deep=True) for idea in leaf_ideas),
+                key=lambda idea: (-idea.total_score, idea.idea_id),
+            )
+            elo_matches: list[EloMatch] = []
+        else:
+            ranked_ideas, elo_matches = run_elo_tournament(
+                leaf_ideas,
+                judge_fn=lambda idea_a, idea_b: self._judge_pair(
+                    brief=brief,
+                    idea_a=idea_a,
+                    idea_b=idea_b,
+                    sources=sources,
+                ),
+            )
         if observer is not None:
             observer.metric("elo_matches", len(elo_matches))
             if ranked_ideas:
@@ -277,6 +302,47 @@ class ResearchAgent:
         memory_hits,
         proposal_hits,
     ) -> list[ResearchIdea]:
+        if self.expansion_blind:
+            blind = self.llm.structured(
+                BlindIdeaExpansion,
+                label=f"research_expansion_blind_depth_{depth}_{parent.idea_id}",
+                system_prompt=(
+                    "You are an idea expander for EvoResearcher. Produce exactly two distinct child "
+                    "ideas that build on the parent. Each child should be a standalone, well-formed "
+                    "research direction."
+                ),
+                user_prompt=(
+                    f"Brief: {brief.model_dump_json(indent=2)}\n"
+                    f"Parent idea: {parent.model_dump_json(indent=2)}\n"
+                    f"Ideation memory hits: {[entry.model_dump() for entry in memory_hits]}\n"
+                    f"Proposal memory hits: {[entry.model_dump() for entry in proposal_hits]}\n"
+                    f"Sources: {[source.model_dump() for source in sources[:4]]}\n"
+                    "Return two arbitrary children."
+                ),
+            )
+            child_a = self._make_idea(
+                idea_id=f"idea-{next(self._counter)}",
+                depth=depth,
+                parent_id=parent.idea_id,
+                relation_to_parent="blind_child_a",
+                title=blind.child_a.title,
+                summary=blind.child_a.summary,
+                method_outline=blind.child_a.method_outline,
+                evidence_use=blind.child_a.evidence_use,
+                risks=blind.child_a.risks,
+            )
+            child_b = self._make_idea(
+                idea_id=f"idea-{next(self._counter)}",
+                depth=depth,
+                parent_id=parent.idea_id,
+                relation_to_parent="blind_child_b",
+                title=blind.child_b.title,
+                summary=blind.child_b.summary,
+                method_outline=blind.child_b.method_outline,
+                evidence_use=blind.child_b.evidence_use,
+                risks=blind.child_b.risks,
+            )
+            return [child_a, child_b]
         expansion = self.llm.structured(
             IdeaExpansion,
             label=f"research_expansion_depth_{depth}_{parent.idea_id}",

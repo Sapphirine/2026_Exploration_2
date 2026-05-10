@@ -72,6 +72,16 @@ def main() -> None:
     parser.add_argument("--branching-factor", type=int, default=2)
     parser.add_argument("--max-sources", type=int, default=6)
     parser.add_argument("--no-search", action="store_true")
+    parser.add_argument(
+        "--blind-expansion",
+        action="store_true",
+        help="A_TREE ablation: drop review feedback / refine-vs-alternative structure from tree expansion.",
+    )
+    parser.add_argument(
+        "--no-elo",
+        action="store_true",
+        help="A_ELO ablation: skip Elo tournament and rank leaves by total_score.",
+    )
     parser.add_argument("--mode", default="general", choices=("general", "ml"))
     parser.add_argument(
         "--label",
@@ -114,7 +124,14 @@ def main() -> None:
     ideation_memory = JSONMemoryStore(config.memory_dir / "ideation_memory.json")
     proposal_memory = JSONMemoryStore(config.memory_dir / "proposal_memory.json")
     intake_agent = IntakeAgent(llm)
-    research_agent = ResearchAgent(config, llm, ideation_memory, proposal_memory)
+    research_agent = ResearchAgent(
+        config,
+        llm,
+        ideation_memory,
+        proposal_memory,
+        expansion_blind=args.blind_expansion,
+        skip_elo=args.no_elo,
+    )
     proposal_agent = ProposalAgent(llm)
     ema_agent = EvolutionMemoryAgent(
         ideation_memory=ideation_memory,
@@ -174,6 +191,14 @@ def main() -> None:
                         "ok": state is not None,
                         "error": error,
                         "report_path": str(md_dst.relative_to(REPO_ROOT.parent)) if md_src.exists() else None,
+                        "settings": {
+                            "tree_depth": args.tree_depth,
+                            "branching_factor": args.branching_factor,
+                            "max_sources": args.max_sources,
+                            "search_enabled": not args.no_search,
+                            "blind_expansion": args.blind_expansion,
+                            "skip_elo": args.no_elo,
+                        },
                     }
                 )
                 + "\n"
