@@ -1,0 +1,4 @@
+claim_id,summary,baseline,ablation,expected_sign,baseline_mean,ablation_mean,delta,noise_std,exceeds_noise,expected_sign_match,verdict,description
+Claim 1 (Tree guidance),Review-guided tree expansion outperforms blind expansion.,evoresearcher_n3,evoresearcher_blind_n3,-,,,,0.1242978805354934,,,PENDING (missing run),Default N=3 minus A_TREE blind. Positive delta means the review-guided structure earns its keep.
+Claim 2 (Elo ranking),Elo tournament beats sort-by-score for top-1 selection.,evoresearcher_n3,evoresearcher_noelo_n3,-,,,,0.1242978805354934,,,PENDING (missing run),Default N=3 minus A_ELO sort-by-score. Positive delta means Elo earns its keep.
+Claim 4 (EMA gain),Warm memory pass beats cold pass.,evoresearcher_n3,evoresearcher_warm_n3,+,,,,0.1242978805354934,,,PENDING (missing run),Warm pass minus cold default. Positive delta means EMA adds signal.

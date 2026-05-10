@@ -1,0 +1,6 @@
+label,judge_input_tokens,judge_output_tokens,judge_total_tokens,judge_cost_usd,run_seconds,run_minutes
+evoresearcher,46547,27100,73647,0.0424,874.6,14.6
+evoresearcher_blind_n3,141915,78941,220856,0.1252,2655.3,44.3
+evoresearcher_n3,152841,87334,240175,0.1373,2840.3,47.3
+evoresearcher_warm_n3,157002,87376,244378,0.1385,2495.8,41.6
+TOTAL,498305,280751,779056,0.4434,8866.0,147.8

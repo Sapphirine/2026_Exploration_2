@@ -1,0 +1,2 @@
+label,n_tasks,info_recall_mean,info_recall_std,analysis_mean,analysis_std,presentation_mean,presentation_std,total_mean,total_std
+evoresearcher_warm_n3,15,0.1500140893316325,0.14343870912224782,0.24213564213564212,0.26339245447802057,0.805952380952381,0.2762003722130461,0.22753379953379954,0.15402886952263026

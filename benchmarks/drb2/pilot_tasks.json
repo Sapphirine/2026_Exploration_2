@@ -1,0 +1,53 @@
+[
+  {
+    "idx": 4,
+    "id": "task2+",
+    "theme": "Finance & Business",
+    "description": "A Detailed Report on the Retirement Savings Gap in Select Asian Countries",
+    "n_rubrics": 72,
+    "n_recall": 53,
+    "n_analysis": 11,
+    "n_presentation": 8
+  },
+  {
+    "idx": 16,
+    "id": "task8",
+    "theme": "Science & Technology",
+    "description": "Research on Materials Inverse Design Technology and Databases",
+    "n_rubrics": 52,
+    "n_recall": 37,
+    "n_analysis": 12,
+    "n_presentation": 3
+  },
+  {
+    "idx": 42,
+    "id": "task17+",
+    "theme": "Software Development",
+    "description": "Survey on the Impact of Low-Code Platforms and Their Applications (2025)",
+    "n_rubrics": 75,
+    "n_recall": 47,
+    "n_analysis": 21,
+    "n_presentation": 7
+  },
+  {
+    "idx": 52,
+    "id": "task21",
+    "theme": "Education & Jobs",
+    "description": "A Comprehensive Report on the Opportunities and Challenges of Applying Generative AI in Education.",
+    "n_rubrics": 55,
+    "n_recall": 35,
+    "n_analysis": 14,
+    "n_presentation": 6
+  },
+  {
+    "idx": 68,
+    "id": "task27+",
+    "theme": "Health",
+    "description": "Conceptual Analysis of AI-Assisted Shared Decision-Making in Healthcare",
+    "n_rubrics": 60,
+    "n_recall": 48,
+    "n_analysis": 8,
+    "n_presentation": 4,
+    "replaced": 62
+  }
+]

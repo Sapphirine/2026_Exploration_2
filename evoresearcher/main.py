@@ -26,6 +26,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--branching-factor", type=int, default=2, help="Number of children kept per expansion step.")
     parser.add_argument("--max-sources", type=int, default=6, help="Maximum number of retrieved web sources.")
     parser.add_argument("--no-search", action="store_true")
+    parser.add_argument(
+        "--blind-expansion",
+        action="store_true",
+        help="A_TREE ablation: drop review feedback / refine-vs-alternative structure from tree expansion.",
+    )
+    parser.add_argument(
+        "--no-elo",
+        action="store_true",
+        help="A_ELO ablation: skip Elo tournament and rank leaves by total_score.",
+    )
     parser.add_argument("--print-json", action="store_true")
     return parser
 
@@ -49,7 +59,14 @@ def main(argv: list[str] | None = None) -> None:
     ideation_memory = JSONMemoryStore(config.memory_dir / "ideation_memory.json")
     proposal_memory = JSONMemoryStore(config.memory_dir / "proposal_memory.json")
     intake_agent = IntakeAgent(llm)
-    research_agent = ResearchAgent(config, llm, ideation_memory, proposal_memory)
+    research_agent = ResearchAgent(
+        config,
+        llm,
+        ideation_memory,
+        proposal_memory,
+        expansion_blind=args.blind_expansion,
+        skip_elo=args.no_elo,
+    )
     proposal_agent = ProposalAgent(llm)
     ema_agent = EvolutionMemoryAgent(
         ideation_memory=ideation_memory,
