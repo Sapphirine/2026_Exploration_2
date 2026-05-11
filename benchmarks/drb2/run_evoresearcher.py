@@ -41,8 +41,8 @@ RUNS_DIR = BENCH_DIR / "runs"
 TIMINGS_PATH = BENCH_DIR / "run_timings.jsonl"
 
 
-def load_pilot_prompts() -> list[dict]:
-    pilot = json.loads(PILOT_JSON.read_text())
+def load_pilot_prompts(tasks_file: Path = PILOT_JSON) -> list[dict]:
+    pilot = json.loads(tasks_file.read_text())
     pilot_idx_set = {entry["idx"] for entry in pilot}
     prompts: dict[int, dict] = {}
     with TASKS_JSONL.open() as fh:
@@ -93,12 +93,22 @@ def main() -> None:
         default=None,
         help="Comma-separated task indices to run (subset of pilot_tasks.json). Default: all.",
     )
+    parser.add_argument(
+        "--tasks-file",
+        default=str(PILOT_JSON),
+        help="Path to the JSON task list. Defaults to benchmarks/drb2/pilot_tasks.json. Use this to swap in a within-theme subset.",
+    )
     args = parser.parse_args()
 
     if not DRB2_REPO.exists():
         raise SystemExit(f"DRB-II repo not found at {DRB2_REPO}. Clone it first.")
 
-    pilot_tasks = load_pilot_prompts()
+    tasks_file = Path(args.tasks_file)
+    if not tasks_file.is_absolute():
+        tasks_file = (REPO_ROOT / tasks_file).resolve()
+    if not tasks_file.exists():
+        raise SystemExit(f"Tasks file not found: {tasks_file}")
+    pilot_tasks = load_pilot_prompts(tasks_file)
     if args.only_idx:
         wanted = {int(x) for x in args.only_idx.split(",") if x.strip()}
         pilot_tasks = [t for t in pilot_tasks if t["idx"] in wanted]
@@ -198,6 +208,7 @@ def main() -> None:
                             "search_enabled": not args.no_search,
                             "blind_expansion": args.blind_expansion,
                             "skip_elo": args.no_elo,
+                            "tasks_file": str(tasks_file.relative_to(REPO_ROOT)) if tasks_file.is_relative_to(REPO_ROOT) else str(tasks_file),
                         },
                     }
                 )
