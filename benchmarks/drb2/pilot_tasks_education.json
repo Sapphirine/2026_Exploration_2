@@ -1,0 +1,42 @@
+[
+  {
+    "idx": 54,
+    "id": "task71",
+    "theme": "Education & Jobs",
+    "description": "An Overview of AI Tools Providing Writing Scaffolds for K-12 English Students",
+    "n_rubrics": 68,
+    "n_recall": 49,
+    "n_analysis": 11,
+    "n_presentation": 8
+  },
+  {
+    "idx": 56,
+    "id": "task72",
+    "theme": "Education & Jobs",
+    "description": "A Review of the Impact of Generative Artificial Intelligence on the Labor Market",
+    "n_rubrics": 70,
+    "n_recall": 57,
+    "n_analysis": 8,
+    "n_presentation": 5
+  },
+  {
+    "idx": 58,
+    "id": "task23",
+    "theme": "Education & Jobs",
+    "description": "A Review of the Effectiveness of Online Learning in Higher Education during COVID",
+    "n_rubrics": 126,
+    "n_recall": 100,
+    "n_analysis": 22,
+    "n_presentation": 4
+  },
+  {
+    "idx": 52,
+    "id": "task21",
+    "theme": "Education & Jobs",
+    "description": "A Comprehensive Report on the Opportunities and Challenges of Applying Generative AI in Education.",
+    "n_rubrics": 55,
+    "n_recall": 35,
+    "n_analysis": 14,
+    "n_presentation": 6
+  }
+]

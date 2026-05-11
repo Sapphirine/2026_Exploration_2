@@ -1,0 +1,9 @@
+label,judge_input_tokens,judge_output_tokens,judge_total_tokens,judge_cost_usd,run_seconds,run_minutes
+evoresearcher,46547,27239,73786,0.0425,874.6,14.6
+evoresearcher_blind_n3,152349,84283,236632,0.1338,2878.4,48.0
+evoresearcher_education_n3,137629,71148,208777,0.1154,2190.3,36.5
+evoresearcher_n3,152841,85872,238713,0.1357,2840.3,47.3
+evoresearcher_noelo_n3,151293,85070,236363,0.1344,2428.6,40.5
+evoresearcher_warm_n3,157002,88682,245684,0.1399,2495.8,41.6
+qwen3_max,174728,38474,213202,0.0895,0.0,0.0
+TOTAL,972389,480768,1453157,0.7912,13708.0,228.5
