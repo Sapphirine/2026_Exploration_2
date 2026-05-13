@@ -1,4 +1,4 @@
-# EvoResearcher
+# 2026_Exploration_2: EvoResearcher
 
 EvoResearcher is an interactive deep-research proposal system. It uses LangGraph, DeepSeek models, web retrieval, dual JSON memory, tree-search ideation, Elo ranking, and Markdown/LaTeX/PDF report generation.
 
